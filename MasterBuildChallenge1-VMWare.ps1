@@ -4,12 +4,11 @@ Write-host "Importing Modules..."
 write-host ""
 
 Import-Module Rubrik
-Import-Module VMware.PowerCLI
 
 #Variables: Please change these
 
 #Rubrik Cluster ID, enter your clusters name or IP address
-$RubrikCluster = "YOUR RUBRIK HOSTNAME HERE"
+$RubrikCluster = "rubrik.city.siouxfallssd.org"
 #Directory to output data too
 $OutputDirectory = "H:\RubrikData"
 
