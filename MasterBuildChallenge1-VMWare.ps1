@@ -95,7 +95,7 @@ foreach ($vm in $RubrikVMlist) {
 	$Report += $ReportLine
 }
 
-#Output sorted list of VMs then save to file along with a seperate report by missed snapshots
+#Output sorted list of VMs then save to file along with a seperate report by missed snapshots and for relics
 $Report | Format-Table
 $Report | export-csv -path ($OutputDirectory + '\' + $currentdate + '-Virtual Machine List.csv')
 $MissedReport = $Report | Where-Object {$_.MissedSnapshotTotal -ne 0} | Sort-Object -Descending MissedSnapshots
