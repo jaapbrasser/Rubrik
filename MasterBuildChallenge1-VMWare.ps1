@@ -44,7 +44,7 @@ write-host ""
 
 write-host "Please enter a credential to connect to the Rubrik Array"
 write-host ""
-$Credential = Get-Credential $null
+$Credential = Get-Credential $nul
 
 try
 {
@@ -90,7 +90,7 @@ foreach ($vm in $RubrikVMlist) {
 	$ReportLine | Add-Member -MemberType NoteProperty -Name "SLA Name" -Value "$EffectiveSlaDomainName"
 	$ReportLine | Add-Member -MemberType NoteProperty -Name "ClusterName" -Value "$ClusterName"
 	$ReportLine | Add-Member -MemberType NoteProperty -Name "HostName" -Value "$HostName"
-	$ReportLine | Add-Member -MemberType NoteProperty -Name "Missed Snapshot Count" -Value "$MissedSnapshotTotal"
+	$ReportLine | Add-Member -MemberType NoteProperty -Name "MissedSnapshotCount" -Value "$MissedSnapshotTotal"
     $ReportLine | Add-Member -MemberType NoteProperty -Name "Relic" -Value $isRelic
 	$Report += $ReportLine
 }
@@ -98,7 +98,7 @@ foreach ($vm in $RubrikVMlist) {
 #Output sorted list of VMs then save to file along with a seperate report by missed snapshots and for relics
 $Report | Format-Table
 $Report | export-csv -path ($OutputDirectory + '\' + $currentdate + '-Virtual Machine List.csv')
-$MissedReport = $Report | Where-Object {$_.MissedSnapshotTotal -ne 0} | Sort-Object -Descending MissedSnapshots
+$MissedReport = $Report | Where-Object {$_.MissedSnapshotCount -ne 0} | Sort-Object -Descending MissedSnapshotCount
 $MissedReport | export-csv -path ($OutputDirectory + '\' + $currentdate + '-VMs with Missed Snapshots.csv')
-$RelicReport = $Report | Where-Object {$_.isRelic}
+$RelicReport = $Report | Where-Object {$_.isRelic -eq $True}
 $RelicReport | export-csv -path ($OutputDirectory + '\' + $currentdate + '-Relic Virtual Machines.csv')
