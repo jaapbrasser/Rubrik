@@ -1,11 +1,5 @@
 # Rubrik
 Rubrik Projects
-   _____                     _ _                   __  __           _              ____        _ _     _    _____ _           _ _                        
-  / ____|                   | (_)                 |  \/  |         | |            |  _ \      (_) |   | |  / ____| |         | | |                       
- | |  __ _   _  __ _ _ __ __| |_  __ _ _ __  ___  | \  / | __ _ ___| |_ ___ _ __  | |_) |_   _ _| | __| | | |    | |__   __ _| | | ___ _ __   __ _  ___  
- | | |_ | | | |/ _` | '__/ _` | |/ _` | '_ \/ __| | |\/| |/ _` / __| __/ _ \ '__| |  _ <| | | | | |/ _` | | |    | '_ \ / _` | | |/ _ \ '_ \ / _` |/ _ \ 
- | |__| | |_| | (_| | | | (_| | | (_| | | | \__ \ | |  | | (_| \__ \ |_  __/ |    | |_) | |_| | | | (_| | | |____| | | | (_| | | |  __/ | | | (_| |  __/ 
-  \_____|\__,_|\__,_|_|  \__,_|_|\__,_|_| |_|___/ |_|  |_|\__,_|___/\__\___|_|    |____/ \__,_|_|_|\__,_|  \_____|_| |_|\__,_|_|_|\___|_| |_|\__, |\___| 
-                                                                                                                                              __/ |                  
-                                                                                                                                             |___/                   
-                                                                                                                                             Brandon Morris
+
+MasterBuildChallenge1-VMWare - change the output direcectory and cluster name then execute.  This will generate a report of VMWare Virtual machines with Name, SLA Name, Cluster, Host, Missed Snapshot Count, and if the VM is a Relic. 
+Brandon Morris
