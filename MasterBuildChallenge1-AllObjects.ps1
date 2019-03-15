@@ -146,6 +146,9 @@ foreach ($row in $reportdata) {
     $lastsnapshot = $row.LastSnapshot
     $totalsnapshots= $row.TotalSnapshots
     $missedsnapshots = $row.MissedSnapshots
+    $VMHostName = ""
+    $VMclustername = ""
+
     if ( $objecttype -eq "VmwareVirtualMachine" ){
       $VMHostName = Get-rubrikvm -name $row.ObjectName | select -ExpandProperty hostName
       $VMclustername = get-rubrikvm -name $row.ObjectName | select -ExpandProperty clustername
