@@ -45,7 +45,7 @@ function Get-RubrikReportData41 () {
     Param (
         [string]$rubrik_cluster,
         [string]$rubrik_user,
-        [string]$rubrik_pass,
+        [securestring]$rubrik_pass,
         [string]$report_id,
         [System.Object]$report_query
     )
@@ -137,7 +137,7 @@ $Report=@()
 
 #Run through each object from the report, gather host and cluster for each virtual machine, VMWare only but could add for others as needed
 
-foreach ($row in $reportdata) {
+$report = foreach ($row in $reportdata) {
 	$objectname = $row.objectname
 	$objecttype = $row.objecttype
     $location = $row.location
@@ -154,22 +154,21 @@ foreach ($row in $reportdata) {
       $VMclustername = get-rubrikvm -name $row.ObjectName | select -ExpandProperty clustername
       }
 
-    #this could be commented out to save a lot of console output if ran programatically
-    write-host "proccessing" $row.objectname
+    # Instead of commenting out we can use Write-Verbose
+    Write-Verbose "proccessing" $row.objectname
 	
-    $ReportLine = new-object PSObject
-    $ReportLine | Add-Member -MemberType NoteProperty -Name "Object Name" -Value "$objectname"
-    $ReportLine | Add-Member -MemberType NoteProperty -Name "Object Type" -Value "$objecttype"
-    $ReportLine | Add-Member -MemberType NoteProperty -Name "Location" -Value "$location"
-    $reportline | Add-Member -MemberType NoteProperty -Name "HostName" -Value "$VMHostName"
-    $Reportline | add-member -MemberType NoteProperty -Name "ClusterName" -Value "$VMClusterName"
-	$ReportLine | Add-Member -MemberType NoteProperty -Name "SLA Name" -Value "$sladomain"
-    $ReportLine | Add-Member -MemberType NoteProperty -Name "Compliance Status" -Value "$compliancestatus"
-	$ReportLine | Add-Member -MemberType NoteProperty -Name "Last Snapshot" -Value "$lastsnapshot"
-	$ReportLine | Add-Member -MemberType NoteProperty -Name "Total Snapshots" -Value "$totalsnapshots"
-	$ReportLine | Add-Member -MemberType NoteProperty -Name "Missed Snapshot Count" -Value "$missedsnapshots"
-    
-    $Report += $ReportLine
+    [pscustomobject]@{
+        "Object Name" = "$objectname"
+        "Object Type" = "$objecttype"
+        "Location" -Value "$location"
+        "HostName" = "$VMHostName"
+        "ClusterName" = "$VMClusterName"
+	    "SLA Name" = "$sladomain"
+        "Compliance Status" = "$compliancestatus"
+	    "Last Snapshot" = "$lastsnapshot"
+	    "Total Snapshots" = "$totalsnapshots"
+	    "Missed Snapshot Count" = "$missedsnapshots"
+    }
 }
 
 #display report
